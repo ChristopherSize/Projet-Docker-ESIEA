@@ -27,6 +27,17 @@ server.post("/register", (req, res) => {
   });
 });
 
+// Route pour obtenir tous les mangas
+server.get("/mangas", (req, res) => {
+  let sql = "SELECT * FROM mangas";
+  db.query(sql, (err, result) => {
+    if (err) {
+      console.error("Select Error: ", err);
+      return res.status(500).send(err.message);
+    }
+    res.send(result);
+  });
+});
 
 // Route pour modifier un manga
 server.put("/edit", (req, res) => {
