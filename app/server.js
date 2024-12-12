@@ -28,8 +28,19 @@ server.post("/register", (req, res) => {
 });
 
 
+// Route pour modifier un manga
+server.put("/edit", (req, res) => {
+  const { id, name, type, note } = req.body;
 
-
+  let sql = "UPDATE mangas SET name = ?, type = ?, note = ? WHERE id = ?";
+  db.query(sql, [name, type, note, id], (err, result) => {
+    if (err) {
+      console.error("Update Error: ", err);
+      return res.status(500).send(err.message);
+    }
+    res.send(result);
+  });
+});
 
 // Route pour supprimer un manga
 server.delete("/delete/:id", (req, res) => {
