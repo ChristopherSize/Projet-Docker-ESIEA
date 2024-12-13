@@ -1,0 +1,45 @@
+version: "3.8"
+services:
+  frontend:
+    build:
+      context: ./projet_docker_esiea # Chemin vers le dossier du frontend Angular
+      dockerfile: Dockerfile #
+    ports:
+      - "4200:80" # Expose le port 80 pour NGINX (frontend Angular)
+    depends_on:
+      - backend
+    volumes:
+      - ./projet_docker_esiea/dist:/usr/share/nginx/html
+
+  backend:
+    build:
+      context: ./app # Chemin vers le dossier du backend Node.js
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000" # Expose le port du backend
+    depends_on:
+      - database
+    volumes:
+      - ./app:/app
+    environment:
+      DB_HOST: database
+      DB_PORT: 3306
+      DB_USER: root
+      DB_PASSWORD: example
+      DB_NAME: mangas
+
+  database:
+    image: mysql:8.0 # Image MySQL
+    container_name: mysql_database
+    environment:
+      MYSQL_ROOT_PASSWORD: root # Mot de passe root
+      MYSQL_DATABASE: mangas # Nom de la base
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+    ports:
+      - "3306:3306" # Expose le port MySQL
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:
