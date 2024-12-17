@@ -1,0 +1,42 @@
+#form{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5%;
+  flex-wrap: nowrap;
+  font-weight: bold;
+}
+input[type="text"]{
+  border-color: rgb(21, 21, 111);
+  border-radius: 5px;
+  padding: 10px 50px 10px 10px;
+}
+select{
+  border-color: rgb(21, 21, 111);
+  border-radius: 5px;
+  padding: 10px 50px 10px 10px;
+}
+input[type="submit"]{
+  background-color: #1976d2;
+  color: white;
+  font-weight: bold;
+  border-color: rgb(21, 21, 111);
+  border-radius: 5px;
+  padding: 10px 10px 10px 10px;
+}
+table {
+  border-collapse: collapse;
+  min-width: 400px;/*Pour que la table soit grande quelque soit le contenu*/
+  border-radius: 5px 5px 0 0;
+  overflow: hidden;/*Utiliser ici pour que border radius marche*/
+  box-shadow: 0 0 20px rgba(0,0,0,0.15);
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5%;
+}
+table thead tr{
+  background-color: #1976d2;
+  color: #eee;
+  text-align:left;/*Pour aligner à gauche*/
+  font-weight: bold;
+}
