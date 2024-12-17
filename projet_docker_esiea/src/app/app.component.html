@@ -257,27 +257,46 @@
   <form method="post">
     <div id="form">
         <label>Nom:</label>
-        <input type="text" name="name" required>
+        <input type="text" name="name" required [(ngModel)]="name">
         <label>Type:</label>
-        <select name="typeAnime">
-              <option value="France" >France</option>
-              <option value="Belgique" >Belgique</option>
-              <option value="canada" selected="selected" >Canada</option>
-              <option value="Maroc">Maroc</option>
-              <option value="Cameroun">Cameroun</option>
-              <option value="Togo">Togo</option>
+        <select name="typeAnime" [(ngModel)]="type">
+          <option value="choose" selected="selected" >Quel est le genre de cet animé ?</option>
+              <option value="Kodomo" >Kodomo</option>
+              <option value="Shōnen" >Shōnen</option>
+              <option value="Shōjo">Shōjo </option>
+              <option value="Seinen">Seinen </option>
+              <option value="Josei">Josei </option>
+              <option value="Seijin">Seijin</option>
       </select>
       <label>Note:</label>
-        <select name="typeAnime">
-              <option value="France" >France</option>
-              <option value="Belgique" >Belgique</option>
-              <option value="canada" selected="selected" >Canada</option>
-              <option value="Maroc">Maroc</option>
-              <option value="Cameroun">Cameroun</option>
-              <option value="Togo">Togo</option>
+        <select name="note" [(ngModel)]="note">
+              <option value="choose" selected="selected" >Quelle note attribué vous à cet animé ?</option>
+              <option value="S" >S</option>
+              <option value="A" >A</option>
+              <option value="B" >B</option>
+              <option value="C">C</option>
+              <option value="D">D</option>
       </select>
-      <input type="submit" value="Ajouter">
+      <input (click) = 'postMethod()' type="submit" value="Ajouter">
     </div>
   </form>
+
+  <table>
+    <thead>
+        <tr>
+            <th>NOM</th>
+            <th>TYPE</th>
+            <th>NOTE</th>
+            <th>OPTIONS</th>
+        </tr>
+    </thead>
+  </table>
+  <p>{{getJsonValue["title"]}}</p>
+
+  <p>{{postJsonValue | json}}</p>
+
+  <p>{{name}}</p>
+  <p>{{type}}</p>
+  <p>{{note}}</p>
 
 <router-outlet></router-outlet>
