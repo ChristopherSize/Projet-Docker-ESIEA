@@ -1,12 +1,12 @@
 const express = require("express");
 const server = express();
-const mysql = require("mysql");
+const mysql = require("mysql2");
 const cors = require("cors");
 
 const db = mysql.createPool({
   host: process.env.DB_HOST || "127.0.0.1",
-  user: process.env.DB_USER || "test",
-  password: process.env.DB_PASSWORD || "test",
+  user: process.env.DB_USER || "root",
+  password: process.env.DB_PASSWORD || "",
   database: process.env.DB_NAME || "mydatabase",
 });
 
@@ -68,4 +68,3 @@ server.delete("/delete/:id", (req, res) => {
 });
 
 server.listen(3000, () => console.log("Server running on port 3000"));
-
