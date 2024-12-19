@@ -8,8 +8,6 @@ services:
       - "4200:80" # Expose le port 80 pour NGINX (frontend Angular)
     depends_on:
       - backend
-    volumes:
-      - ./projet_docker_esiea/dist:/usr/share/nginx/html
 
   backend:
     build:
