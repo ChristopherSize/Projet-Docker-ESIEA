@@ -277,7 +277,8 @@
               <option value="C">C</option>
               <option value="D">D</option>
       </select>
-      <input (click) = 'postMethod()' type="submit" value="Ajouter">
+      <input (click) = 'postMethod()' type="submit" value="Ajouter" *ngIf="!edit">
+      <input  type="submit" value="Modifier" *ngIf="edit" (click) = 'editMethod()'>
     </div>
   </form>
 
@@ -290,13 +291,16 @@
             <th>OPTIONS</th>
         </tr>
     </thead>
+    <tbody>
+      <tr *ngFor="let manga of getJsonValue">
+        <td>{{manga.name}}</td>
+        <td>{{manga.type}}</td>
+        <td>{{manga.note}}</td>
+        <td class="option">
+          <button class="edit" (click) = 'getId(manga.id)'>Edit</button>
+          <button class="delete" (click) = 'deleteMethod(manga.id)'>Delete</button>
+        </td>
+      </tr>
+    </tbody>
   </table>
-  <p>{{getJsonValue["title"]}}</p>
-
-  <p>{{postJsonValue | json}}</p>
-
-  <p>{{name}}</p>
-  <p>{{type}}</p>
-  <p>{{note}}</p>
-
 <router-outlet></router-outlet>

@@ -4,10 +4,10 @@ const mysql = require("mysql2");
 const cors = require("cors");
 
 const db = mysql.createPool({
-  host: process.env.DB_HOST || "127.0.0.1",
-  user: process.env.DB_USER || "root",
-  password: process.env.DB_PASSWORD || "",
-  database: process.env.DB_NAME || "mydatabase",
+  host: process.env.DB_HOST || "mysql_database",
+  user: process.env.DB_USER || "test",
+  password: process.env.DB_PASSWORD || "test",
+  database: process.env.DB_NAME || "mangas",
 });
 
 server.use(express.json());
@@ -40,8 +40,9 @@ server.get("/mangas", (req, res) => {
 });
 
 // Route pour modifier un manga
-server.put("/edit", (req, res) => {
-  const { id, name, type, note } = req.body;
+server.put("/edit/:id", (req, res) => {
+  const { id } = req.params;
+  const { name, type, note } = req.body;
 
   let sql = "UPDATE mangas SET name = ?, type = ?, note = ? WHERE id = ?";
   db.query(sql, [name, type, note, id], (err, result) => {

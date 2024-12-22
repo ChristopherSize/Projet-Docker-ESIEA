@@ -40,3 +40,19 @@ table thead tr{
   text-align:left;/*Pour aligner à gauche*/
   font-weight: bold;
 }
+.option{
+  display: flex;
+  gap: 5%;
+}
+.option .delete{
+  background-color: red;
+  color: white;
+  border-radius: 5px;
+  border-color: red;
+}
+.option .edit{
+  background-color: green;
+  color: white;
+  border-radius: 5px;
+  border-color: green;
+}

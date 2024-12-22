@@ -10,6 +10,7 @@ services:
       - backend
 
   backend:
+    container_name: backend
     build:
       context: ./app # Chemin vers le dossier du backend Node.js
       dockerfile: Dockerfile
@@ -17,35 +18,43 @@ services:
       - "3000:3000" # Expose le port du backend
     depends_on:
       - database
-    volumes:
-      - ./app:/app
     environment:
       DB_HOST: database
       #DB_PORT: 3306
-      DB_USER: root
-      DB_PASSWORD: example
+      DB_USER: test
+      DB_PASSWORD: test
       DB_NAME: mangas
+    networks:
+      - database
 
   database:
     image: mysql:8.0 # Image MySQL
     container_name: mysql_database
     environment:
       MYSQL_ROOT_PASSWORD: myrootpassword
-      MYSQL_DATABASE:  mydatabase 
+      MYSQL_DATABASE:  mangas 
       MYSQL_USER: test
       MYSQL_PASSWORD: test 
     ports:
       - "3306:3306" # Expose le port MySQL
     volumes:
       - mysql_data:/var/lib/mysql
+    networks:
+      - database
+
   phpmyadmin:
+    container_name: phpmyadmin
     image: phpmyadmin/phpmyadmin:4.9
     ports:
       - 8080:80
     environment:
       PMA_HOST: database
       PMA_USER: test 
-      PMA_PASSWORD: test 
+      PMA_PASSWORD: test
+    networks:
+      - database 
 
 volumes:
   mysql_data:
+networks:
+  database:
