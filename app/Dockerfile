@@ -1,20 +1,15 @@
-# Utiliser une image Node.js officielle
-FROM node:20
-
-
+FROM node:16 AS build
 WORKDIR /app
-
-
 COPY package*.json ./
-
-
 RUN npm install
-
-
+RUN npm install -g @angular/cli
 COPY . .
+RUN npm run build --prod
+
+FROM nginx:alpine
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=build /app/dist/app /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
 
 
-EXPOSE 3000
-
-# Commande pour démarrer l'application
-CMD ["npm", "start"]
